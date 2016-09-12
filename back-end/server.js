@@ -27,16 +27,17 @@ app.post('/api/message', function(req,res){
     res.status(200);
 });
 
-function GetMessages(){
-    Message.find({}).exec(function(err, res){
-        console.log(res);
+app.get('/api/message', GetMessages);
+
+function GetMessages(req, res){
+    Message.find({}).exec(function(err, result){
+        res.send(result);
     });
 }
 
 mongoose.connect("mongodb://localhost:27017/test", function(err,db){
     if (!err) {
         console.log("We are connected to mongo");
-        GetMessages();
         // db.collection('messages').insertOne({'msg':'test'});
     } else {
         console.error("We are not connected to mongo");

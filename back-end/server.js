@@ -18,6 +18,16 @@ app.use(function(req, res, next){
     next();
 })
 
+app.post('/auth/register', function(req,res){
+    console.log(req.body);
+    // var message = new Message(req.body);
+    // 
+    // message.save();
+    // 
+    // res.status(200);
+});
+
+
 app.post('/api/message', function(req,res){
     console.log(req.body);
     var message = new Message(req.body);

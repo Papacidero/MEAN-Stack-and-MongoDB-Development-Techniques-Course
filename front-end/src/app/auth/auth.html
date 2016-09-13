@@ -6,13 +6,15 @@
         <h3 class="panel-title">Login</h3>
       </div>
       <div class="panel-body">
-        <div class="form-group">
-          <input type="email" name="name" placeholder="E-mail address" value="" class="form-control">
+      <form ng-submit="auth.login()">
+          <div class="form-group">
+          <input type="email" name="name" placeholder="E-mail address" value="" class="form-control" ng-model="auth.login.user.email"> 
         </div>
         <div class="form-group">
-          <input type="password" placeholder="Password" name="name" value="" class="form-control">
+          <input type="password" placeholder="Password" name="name" value="" class="form-control" ng-model="auth.login.user.pwd"> 
         </div>
         <button type="submit" name="button" class="btn btn-default">Submit</button>
+      </form>
       </div>
     </div>
 

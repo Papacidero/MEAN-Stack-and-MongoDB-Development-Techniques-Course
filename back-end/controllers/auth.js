@@ -4,8 +4,6 @@ var moment = require('moment');
 
 module.exports = {
     register(req, res) {
-        console.log(req.body);
-
         User.findOne({
             email: req.body.email
         }, function(err, existingUser) {
@@ -15,7 +13,6 @@ module.exports = {
             
             var user = new User(req.body);
             user.save(function(err, result) {
-                console.log(err);
                 if (err) {
                     res.status(500).send({
                         message: err.message

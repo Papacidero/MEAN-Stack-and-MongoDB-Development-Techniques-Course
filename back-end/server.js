@@ -22,6 +22,8 @@ app.use(cors);
 
 
 app.post('/auth/register', auth.register);
+app.post('/auth/login', auth.login);
+
 app.post('/api/message', checkAuthenticated, message.post);
 app.get('/api/message', message.get);
 

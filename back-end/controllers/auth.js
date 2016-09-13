@@ -8,9 +8,11 @@ module.exports = {
             email: req.body.email
         }, function(err, existingUser) {
 
-            if (existingUser) 
-                return res.status(409).send({message: 'User already registered'});
-            
+            if (existingUser)
+                return res.status(409).send({
+                    message: 'User already registered'
+                });
+
             var user = new User(req.body);
             user.save(function(err, result) {
                 if (err) {
@@ -18,14 +20,38 @@ module.exports = {
                         message: err.message
                     });
                 }
-                res.status(200).send({token: createToken(result)});
+                res.status(200).send({
+                    token: createToken(result)
+                });
             });
-            
+
         });
+    },
+    login(req, res) {
+
+        User.findOne({
+            email: req.body.email
+        }, function(err, user) {
+
+            if (!user)
+                return res.status(401).send({
+                    message: 'User or Password invalid'
+                });
+
+            if(req.body.pwd == user.pwd){
+                console.log(req.body, user.pwd);
+                res.send({token: createToken(user)});
+            } else{
+                return res.status(401).send({
+                    message: 'Invalid email and/or password'
+                });
+            }
+        });
+
     }
 };
 
-function createToken(user){
+function createToken(user) {
     var payload = {
         sub: user._id,
         iat: moment().unix(),

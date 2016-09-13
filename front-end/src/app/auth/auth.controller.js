@@ -6,9 +6,9 @@ export class AuthController {
     
   }
   register(){
-    console.log('');
-    this.$auth.signup(
-      {email: this.user}
-    );
-  };
+    var vm = this;
+    this.$auth.signup(this.user).then(function(token){
+      vm.$auth.setToken(token);
+    });
+  }
 }
